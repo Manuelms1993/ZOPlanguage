@@ -1,0 +1,22 @@
+I max = 10;
+I exp = 3;
+
+#ZOP(){
+	I value = 0;
+	loop I i = 0, i < max, i += 1 {
+		
+		value = i;		
+		
+		loop I j = exp-1 , j > 0 , j -= 1{
+			
+			value *= i;		
+			
+		}
+
+		print value;
+
+	}
+	
+	print "end\n";
+}
+

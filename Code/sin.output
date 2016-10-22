@@ -1,0 +1,1993 @@
+Terminales no usados en gramática
+
+   CORL
+   CORR
+   OP_SUB
+
+
+Gramática
+
+    0 $accept: program $end
+
+    1 $@1: %empty
+
+    2 $@2: %empty
+
+    3 program: $@1 var_global $@2 otherFunc main_function
+
+    4 otherFunc: otherFunc function
+    5          | %empty
+
+    6 var_global: %empty
+    7           | init POINTCOMMA var_global
+
+    8 $@3: %empty
+
+    9 $@4: %empty
+
+   10 $@5: %empty
+
+   11 main_function: FUNC MAIN $@3 PARL PARR $@4 $@5 block
+
+   12 $@6: %empty
+
+   13 $@7: %empty
+
+   14 $@8: %empty
+
+   15 function: FUNC NAME FUNTYPE var $@6 PARL args PARR $@7 $@8 block
+
+   16 $@9: %empty
+
+   17 block: KEYL $@9 sentences KEYR
+   18      | error
+
+   19 sentences: sentences sentence
+   20          | sentence
+
+   21 args: %empty
+
+   22 $@10: %empty
+
+   23 args: var NAME $@10 COMMA args
+   24     | var NAME
+
+   25 sentence: init POINTCOMMA
+   26         | assign POINTCOMMA
+   27         | if
+   28         | loop
+   29         | return
+   30         | print
+   31         | callFunction POINTCOMMA
+   32         | break_continue
+
+   33 $@11: %empty
+
+   34 init: var NAME $@11 EQUAL expression
+   35     | error
+
+   36 assign: NAME EQUAL expression
+   37       | NAME OP_ASSIGN expression
+
+   38 $@12: %empty
+
+   39 $@13: %empty
+
+   40 $@14: %empty
+
+   41 $@15: %empty
+
+   42 $@16: %empty
+
+   43 if: IF expression_bin $@12 $@13 $@14 block $@15 $@16 else
+
+   44 $@17: %empty
+
+   45 else: $@17
+
+   46 $@18: %empty
+
+   47 $@19: %empty
+
+   48 $@20: %empty
+
+   49 $@21: %empty
+
+   50 else: ELSE $@18 $@19 $@20 block $@21
+
+   51 $@22: %empty
+
+   52 $@23: %empty
+
+   53 $@24: %empty
+
+   54 loop: LOOP init $@22 COMMA expression_bin $@23 COMMA assign $@24 block
+
+   55 $@25: %empty
+
+   56 $@26: %empty
+
+   57 $@27: %empty
+
+   58 loop: LOOP $@25 COMMA expression_bin $@26 COMMA $@27 block
+
+   59 $@28: %empty
+
+   60 break_continue: BREAK $@28 POINTCOMMA
+
+   61 $@29: %empty
+
+   62 break_continue: CONTINUE $@29 POINTCOMMA
+
+   63 $@30: %empty
+
+   64 return: RETURN expression $@30 POINTCOMMA
+
+   65 print: PRINT const POINTCOMMA
+   66      | PRINT NAME POINTCOMMA
+
+   67 expression: numeric
+   68           | NAME
+   69           | callFunction
+   70           | expression OP_ARI expression
+   71           | PARL expression OP_ARI expression PARR
+
+   72 expression_bin: TRUE
+   73               | FALSE
+   74               | numeric
+   75               | NAME
+   76               | callFunction
+   77               | expression_bin OP_BIN expression_bin
+   78               | PARL expression_bin OP_BIN expression_bin PARR
+
+   79 const: numeric
+   80      | STRING
+   81      | TRUE
+   82      | FALSE
+
+   83 numeric: NUM
+   84        | FLOATNUM
+
+   85 callFunction: NAME PARL param PARR
+
+   86 param: %empty
+   87      | expression COMMA param
+   88      | expression
+
+   89 var: INT
+   90    | FLOAT
+
+
+Terminales con las reglas donde aparecen
+
+$end (0) 0
+error (256) 18 35
+PARL (258) 11 15 71 78 85
+PARR (259) 11 15 71 78 85
+CORL (260)
+CORR (261)
+KEYL (262) 17
+KEYR (263) 17
+INT (264) 89
+FLOAT (265) 90
+IF (266) 43
+ELSE (267) 50
+FUNC (268) 11 15
+LOOP (269) 54 58
+MAIN (270) 11
+RETURN (271) 64
+BREAK (272) 60
+CONTINUE (273) 62
+PRINT (274) 65 66
+TRUE (275) 72 81
+FALSE (276) 73 82
+OP_ARI (277) 70 71
+EQUAL (278) 34 36
+OP_BIN (279) 77 78
+FLOATNUM (280) 84
+NUM (281) 83
+OP_ASSIGN (282) 37
+STRING (283) 80
+POINTCOMMA (284) 7 25 26 31 60 62 64 65 66
+FUNTYPE (285) 15
+NAME (286) 15 23 24 34 36 37 66 68 75 85
+COMMA (287) 23 54 58 87
+OP_SUB (288)
+
+
+No terminales con las reglas donde aparecen
+
+$accept (34)
+    en la izquierda: 0
+program (35)
+    en la izquierda: 3, en la derecha: 0
+$@1 (36)
+    en la izquierda: 1, en la derecha: 3
+$@2 (37)
+    en la izquierda: 2, en la derecha: 3
+otherFunc (38)
+    en la izquierda: 4 5, en la derecha: 3 4
+var_global (39)
+    en la izquierda: 6 7, en la derecha: 3 7
+main_function (40)
+    en la izquierda: 11, en la derecha: 3
+$@3 (41)
+    en la izquierda: 8, en la derecha: 11
+$@4 (42)
+    en la izquierda: 9, en la derecha: 11
+$@5 (43)
+    en la izquierda: 10, en la derecha: 11
+function (44)
+    en la izquierda: 15, en la derecha: 4
+$@6 (45)
+    en la izquierda: 12, en la derecha: 15
+$@7 (46)
+    en la izquierda: 13, en la derecha: 15
+$@8 (47)
+    en la izquierda: 14, en la derecha: 15
+block (48)
+    en la izquierda: 17 18, en la derecha: 11 15 43 50 54 58
+$@9 (49)
+    en la izquierda: 16, en la derecha: 17
+sentences (50)
+    en la izquierda: 19 20, en la derecha: 17 19
+args (51)
+    en la izquierda: 21 23 24, en la derecha: 15 23
+$@10 (52)
+    en la izquierda: 22, en la derecha: 23
+sentence (53)
+    en la izquierda: 25 26 27 28 29 30 31 32, en la derecha: 19 20
+init (54)
+    en la izquierda: 34 35, en la derecha: 7 25 54
+$@11 (55)
+    en la izquierda: 33, en la derecha: 34
+assign (56)
+    en la izquierda: 36 37, en la derecha: 26 54
+if (57)
+    en la izquierda: 43, en la derecha: 27
+$@12 (58)
+    en la izquierda: 38, en la derecha: 43
+$@13 (59)
+    en la izquierda: 39, en la derecha: 43
+$@14 (60)
+    en la izquierda: 40, en la derecha: 43
+$@15 (61)
+    en la izquierda: 41, en la derecha: 43
+$@16 (62)
+    en la izquierda: 42, en la derecha: 43
+else (63)
+    en la izquierda: 45 50, en la derecha: 43
+$@17 (64)
+    en la izquierda: 44, en la derecha: 45
+$@18 (65)
+    en la izquierda: 46, en la derecha: 50
+$@19 (66)
+    en la izquierda: 47, en la derecha: 50
+$@20 (67)
+    en la izquierda: 48, en la derecha: 50
+$@21 (68)
+    en la izquierda: 49, en la derecha: 50
+loop (69)
+    en la izquierda: 54 58, en la derecha: 28
+$@22 (70)
+    en la izquierda: 51, en la derecha: 54
+$@23 (71)
+    en la izquierda: 52, en la derecha: 54
+$@24 (72)
+    en la izquierda: 53, en la derecha: 54
+$@25 (73)
+    en la izquierda: 55, en la derecha: 58
+$@26 (74)
+    en la izquierda: 56, en la derecha: 58
+$@27 (75)
+    en la izquierda: 57, en la derecha: 58
+break_continue (76)
+    en la izquierda: 60 62, en la derecha: 32
+$@28 (77)
+    en la izquierda: 59, en la derecha: 60
+$@29 (78)
+    en la izquierda: 61, en la derecha: 62
+return (79)
+    en la izquierda: 64, en la derecha: 29
+$@30 (80)
+    en la izquierda: 63, en la derecha: 64
+print (81)
+    en la izquierda: 65 66, en la derecha: 30
+expression (82)
+    en la izquierda: 67 68 69 70 71, en la derecha: 34 36 37 64 70
+    71 87 88
+expression_bin (83)
+    en la izquierda: 72 73 74 75 76 77 78, en la derecha: 43 54 58
+    77 78
+const (84)
+    en la izquierda: 79 80 81 82, en la derecha: 65
+numeric (85)
+    en la izquierda: 83 84, en la derecha: 67 74 79
+callFunction (86)
+    en la izquierda: 85, en la derecha: 31 69 76
+param (87)
+    en la izquierda: 86 87 88, en la derecha: 85 87
+var (88)
+    en la izquierda: 89 90, en la derecha: 15 23 24 34
+
+
+State 0
+
+    0 $accept: . program $end
+    1 $@1: . %empty
+    3 program: . $@1 var_global $@2 otherFunc main_function
+
+    $default  reduce usando la regla 1 ($@1)
+
+    program  ir al estado 1
+    $@1      ir al estado 2
+
+
+State 1
+
+    0 $accept: program . $end
+
+    $end  desplazar e ir al estado 3
+
+
+State 2
+
+    3 program: $@1 . var_global $@2 otherFunc main_function
+    6 var_global: . %empty  [FUNC]
+    7           | . init POINTCOMMA var_global
+   34 init: . var NAME $@11 EQUAL expression
+   35     | . error
+   89 var: . INT
+   90    | . FLOAT
+
+    error  desplazar e ir al estado 4
+    INT    desplazar e ir al estado 5
+    FLOAT  desplazar e ir al estado 6
+
+    FUNC  reduce usando la regla 6 (var_global)
+
+    var_global  ir al estado 7
+    init        ir al estado 8
+    var         ir al estado 9
+
+
+State 3
+
+    0 $accept: program $end .
+
+    $default  aceptar
+
+
+State 4
+
+   35 init: error .
+
+    $default  reduce usando la regla 35 (init)
+
+
+State 5
+
+   89 var: INT .
+
+    $default  reduce usando la regla 89 (var)
+
+
+State 6
+
+   90 var: FLOAT .
+
+    $default  reduce usando la regla 90 (var)
+
+
+State 7
+
+    2 $@2: . %empty
+    3 program: $@1 var_global . $@2 otherFunc main_function
+
+    $default  reduce usando la regla 2 ($@2)
+
+    $@2  ir al estado 10
+
+
+State 8
+
+    7 var_global: init . POINTCOMMA var_global
+
+    POINTCOMMA  desplazar e ir al estado 11
+
+
+State 9
+
+   34 init: var . NAME $@11 EQUAL expression
+
+    NAME  desplazar e ir al estado 12
+
+
+State 10
+
+    3 program: $@1 var_global $@2 . otherFunc main_function
+    4 otherFunc: . otherFunc function
+    5          | . %empty
+
+    $default  reduce usando la regla 5 (otherFunc)
+
+    otherFunc  ir al estado 13
+
+
+State 11
+
+    6 var_global: . %empty  [FUNC]
+    7           | . init POINTCOMMA var_global
+    7           | init POINTCOMMA . var_global
+   34 init: . var NAME $@11 EQUAL expression
+   35     | . error
+   89 var: . INT
+   90    | . FLOAT
+
+    error  desplazar e ir al estado 4
+    INT    desplazar e ir al estado 5
+    FLOAT  desplazar e ir al estado 6
+
+    FUNC  reduce usando la regla 6 (var_global)
+
+    var_global  ir al estado 14
+    init        ir al estado 8
+    var         ir al estado 9
+
+
+State 12
+
+   33 $@11: . %empty
+   34 init: var NAME . $@11 EQUAL expression
+
+    $default  reduce usando la regla 33 ($@11)
+
+    $@11  ir al estado 15
+
+
+State 13
+
+    3 program: $@1 var_global $@2 otherFunc . main_function
+    4 otherFunc: otherFunc . function
+   11 main_function: . FUNC MAIN $@3 PARL PARR $@4 $@5 block
+   15 function: . FUNC NAME FUNTYPE var $@6 PARL args PARR $@7 $@8 block
+
+    FUNC  desplazar e ir al estado 16
+
+    main_function  ir al estado 17
+    function       ir al estado 18
+
+
+State 14
+
+    7 var_global: init POINTCOMMA var_global .
+
+    $default  reduce usando la regla 7 (var_global)
+
+
+State 15
+
+   34 init: var NAME $@11 . EQUAL expression
+
+    EQUAL  desplazar e ir al estado 19
+
+
+State 16
+
+   11 main_function: FUNC . MAIN $@3 PARL PARR $@4 $@5 block
+   15 function: FUNC . NAME FUNTYPE var $@6 PARL args PARR $@7 $@8 block
+
+    MAIN  desplazar e ir al estado 20
+    NAME  desplazar e ir al estado 21
+
+
+State 17
+
+    3 program: $@1 var_global $@2 otherFunc main_function .
+
+    $default  reduce usando la regla 3 (program)
+
+
+State 18
+
+    4 otherFunc: otherFunc function .
+
+    $default  reduce usando la regla 4 (otherFunc)
+
+
+State 19
+
+   34 init: var NAME $@11 EQUAL . expression
+   67 expression: . numeric
+   68           | . NAME
+   69           | . callFunction
+   70           | . expression OP_ARI expression
+   71           | . PARL expression OP_ARI expression PARR
+   83 numeric: . NUM
+   84        | . FLOATNUM
+   85 callFunction: . NAME PARL param PARR
+
+    PARL      desplazar e ir al estado 22
+    FLOATNUM  desplazar e ir al estado 23
+    NUM       desplazar e ir al estado 24
+    NAME      desplazar e ir al estado 25
+
+    expression    ir al estado 26
+    numeric       ir al estado 27
+    callFunction  ir al estado 28
+
+
+State 20
+
+    8 $@3: . %empty
+   11 main_function: FUNC MAIN . $@3 PARL PARR $@4 $@5 block
+
+    $default  reduce usando la regla 8 ($@3)
+
+    $@3  ir al estado 29
+
+
+State 21
+
+   15 function: FUNC NAME . FUNTYPE var $@6 PARL args PARR $@7 $@8 block
+
+    FUNTYPE  desplazar e ir al estado 30
+
+
+State 22
+
+   67 expression: . numeric
+   68           | . NAME
+   69           | . callFunction
+   70           | . expression OP_ARI expression
+   71           | . PARL expression OP_ARI expression PARR
+   71           | PARL . expression OP_ARI expression PARR
+   83 numeric: . NUM
+   84        | . FLOATNUM
+   85 callFunction: . NAME PARL param PARR
+
+    PARL      desplazar e ir al estado 22
+    FLOATNUM  desplazar e ir al estado 23
+    NUM       desplazar e ir al estado 24
+    NAME      desplazar e ir al estado 25
+
+    expression    ir al estado 31
+    numeric       ir al estado 27
+    callFunction  ir al estado 28
+
+
+State 23
+
+   84 numeric: FLOATNUM .
+
+    $default  reduce usando la regla 84 (numeric)
+
+
+State 24
+
+   83 numeric: NUM .
+
+    $default  reduce usando la regla 83 (numeric)
+
+
+State 25
+
+   68 expression: NAME .  [error, PARR, KEYL, OP_ARI, POINTCOMMA, COMMA]
+   85 callFunction: NAME . PARL param PARR
+
+    PARL  desplazar e ir al estado 32
+
+    $default  reduce usando la regla 68 (expression)
+
+
+State 26
+
+   34 init: var NAME $@11 EQUAL expression .  [POINTCOMMA, COMMA]
+   70 expression: expression . OP_ARI expression
+
+    OP_ARI  desplazar e ir al estado 33
+
+    $default  reduce usando la regla 34 (init)
+
+
+State 27
+
+   67 expression: numeric .
+
+    $default  reduce usando la regla 67 (expression)
+
+
+State 28
+
+   69 expression: callFunction .
+
+    $default  reduce usando la regla 69 (expression)
+
+
+State 29
+
+   11 main_function: FUNC MAIN $@3 . PARL PARR $@4 $@5 block
+
+    PARL  desplazar e ir al estado 34
+
+
+State 30
+
+   15 function: FUNC NAME FUNTYPE . var $@6 PARL args PARR $@7 $@8 block
+   89 var: . INT
+   90    | . FLOAT
+
+    INT    desplazar e ir al estado 5
+    FLOAT  desplazar e ir al estado 6
+
+    var  ir al estado 35
+
+
+State 31
+
+   70 expression: expression . OP_ARI expression
+   71           | PARL expression . OP_ARI expression PARR
+
+    OP_ARI  desplazar e ir al estado 36
+
+
+State 32
+
+   67 expression: . numeric
+   68           | . NAME
+   69           | . callFunction
+   70           | . expression OP_ARI expression
+   71           | . PARL expression OP_ARI expression PARR
+   83 numeric: . NUM
+   84        | . FLOATNUM
+   85 callFunction: . NAME PARL param PARR
+   85             | NAME PARL . param PARR
+   86 param: . %empty  [PARR]
+   87      | . expression COMMA param
+   88      | . expression
+
+    PARL      desplazar e ir al estado 22
+    FLOATNUM  desplazar e ir al estado 23
+    NUM       desplazar e ir al estado 24
+    NAME      desplazar e ir al estado 25
+
+    $default  reduce usando la regla 86 (param)
+
+    expression    ir al estado 37
+    numeric       ir al estado 27
+    callFunction  ir al estado 28
+    param         ir al estado 38
+
+
+State 33
+
+   67 expression: . numeric
+   68           | . NAME
+   69           | . callFunction
+   70           | . expression OP_ARI expression
+   70           | expression OP_ARI . expression
+   71           | . PARL expression OP_ARI expression PARR
+   83 numeric: . NUM
+   84        | . FLOATNUM
+   85 callFunction: . NAME PARL param PARR
+
+    PARL      desplazar e ir al estado 22
+    FLOATNUM  desplazar e ir al estado 23
+    NUM       desplazar e ir al estado 24
+    NAME      desplazar e ir al estado 25
+
+    expression    ir al estado 39
+    numeric       ir al estado 27
+    callFunction  ir al estado 28
+
+
+State 34
+
+   11 main_function: FUNC MAIN $@3 PARL . PARR $@4 $@5 block
+
+    PARR  desplazar e ir al estado 40
+
+
+State 35
+
+   12 $@6: . %empty
+   15 function: FUNC NAME FUNTYPE var . $@6 PARL args PARR $@7 $@8 block
+
+    $default  reduce usando la regla 12 ($@6)
+
+    $@6  ir al estado 41
+
+
+State 36
+
+   67 expression: . numeric
+   68           | . NAME
+   69           | . callFunction
+   70           | . expression OP_ARI expression
+   70           | expression OP_ARI . expression
+   71           | . PARL expression OP_ARI expression PARR
+   71           | PARL expression OP_ARI . expression PARR
+   83 numeric: . NUM
+   84        | . FLOATNUM
+   85 callFunction: . NAME PARL param PARR
+
+    PARL      desplazar e ir al estado 22
+    FLOATNUM  desplazar e ir al estado 23
+    NUM       desplazar e ir al estado 24
+    NAME      desplazar e ir al estado 25
+
+    expression    ir al estado 42
+    numeric       ir al estado 27
+    callFunction  ir al estado 28
+
+
+State 37
+
+   70 expression: expression . OP_ARI expression
+   87 param: expression . COMMA param
+   88      | expression .  [PARR]
+
+    OP_ARI  desplazar e ir al estado 33
+    COMMA   desplazar e ir al estado 43
+
+    $default  reduce usando la regla 88 (param)
+
+
+State 38
+
+   85 callFunction: NAME PARL param . PARR
+
+    PARR  desplazar e ir al estado 44
+
+
+State 39
+
+   70 expression: expression . OP_ARI expression
+   70           | expression OP_ARI expression .  [error, PARR, KEYL, OP_ARI, POINTCOMMA, COMMA]
+
+    $default  reduce usando la regla 70 (expression)
+
+    El conflicto entre la regla 70 y el terminal OP_ARI se resuelve como reducción. (%left OP_ARI).
+
+
+State 40
+
+    9 $@4: . %empty
+   11 main_function: FUNC MAIN $@3 PARL PARR . $@4 $@5 block
+
+    $default  reduce usando la regla 9 ($@4)
+
+    $@4  ir al estado 45
+
+
+State 41
+
+   15 function: FUNC NAME FUNTYPE var $@6 . PARL args PARR $@7 $@8 block
+
+    PARL  desplazar e ir al estado 46
+
+
+State 42
+
+   70 expression: expression . OP_ARI expression
+   70           | expression OP_ARI expression .  [OP_ARI]
+   71           | PARL expression OP_ARI expression . PARR
+
+    PARR  desplazar e ir al estado 47
+
+    $default  reduce usando la regla 70 (expression)
+
+    El conflicto entre la regla 70 y el terminal OP_ARI se resuelve como reducción. (%left OP_ARI).
+
+
+State 43
+
+   67 expression: . numeric
+   68           | . NAME
+   69           | . callFunction
+   70           | . expression OP_ARI expression
+   71           | . PARL expression OP_ARI expression PARR
+   83 numeric: . NUM
+   84        | . FLOATNUM
+   85 callFunction: . NAME PARL param PARR
+   86 param: . %empty  [PARR]
+   87      | . expression COMMA param
+   87      | expression COMMA . param
+   88      | . expression
+
+    PARL      desplazar e ir al estado 22
+    FLOATNUM  desplazar e ir al estado 23
+    NUM       desplazar e ir al estado 24
+    NAME      desplazar e ir al estado 25
+
+    $default  reduce usando la regla 86 (param)
+
+    expression    ir al estado 37
+    numeric       ir al estado 27
+    callFunction  ir al estado 28
+    param         ir al estado 48
+
+
+State 44
+
+   85 callFunction: NAME PARL param PARR .
+
+    $default  reduce usando la regla 85 (callFunction)
+
+
+State 45
+
+   10 $@5: . %empty
+   11 main_function: FUNC MAIN $@3 PARL PARR $@4 . $@5 block
+
+    $default  reduce usando la regla 10 ($@5)
+
+    $@5  ir al estado 49
+
+
+State 46
+
+   15 function: FUNC NAME FUNTYPE var $@6 PARL . args PARR $@7 $@8 block
+   21 args: . %empty  [PARR]
+   23     | . var NAME $@10 COMMA args
+   24     | . var NAME
+   89 var: . INT
+   90    | . FLOAT
+
+    INT    desplazar e ir al estado 5
+    FLOAT  desplazar e ir al estado 6
+
+    $default  reduce usando la regla 21 (args)
+
+    args  ir al estado 50
+    var   ir al estado 51
+
+
+State 47
+
+   71 expression: PARL expression OP_ARI expression PARR .
+
+    $default  reduce usando la regla 71 (expression)
+
+
+State 48
+
+   87 param: expression COMMA param .
+
+    $default  reduce usando la regla 87 (param)
+
+
+State 49
+
+   11 main_function: FUNC MAIN $@3 PARL PARR $@4 $@5 . block
+   17 block: . KEYL $@9 sentences KEYR
+   18      | . error
+
+    error  desplazar e ir al estado 52
+    KEYL   desplazar e ir al estado 53
+
+    block  ir al estado 54
+
+
+State 50
+
+   15 function: FUNC NAME FUNTYPE var $@6 PARL args . PARR $@7 $@8 block
+
+    PARR  desplazar e ir al estado 55
+
+
+State 51
+
+   23 args: var . NAME $@10 COMMA args
+   24     | var . NAME
+
+    NAME  desplazar e ir al estado 56
+
+
+State 52
+
+   18 block: error .
+
+    $default  reduce usando la regla 18 (block)
+
+
+State 53
+
+   16 $@9: . %empty
+   17 block: KEYL . $@9 sentences KEYR
+
+    $default  reduce usando la regla 16 ($@9)
+
+    $@9  ir al estado 57
+
+
+State 54
+
+   11 main_function: FUNC MAIN $@3 PARL PARR $@4 $@5 block .
+
+    $default  reduce usando la regla 11 (main_function)
+
+
+State 55
+
+   13 $@7: . %empty
+   15 function: FUNC NAME FUNTYPE var $@6 PARL args PARR . $@7 $@8 block
+
+    $default  reduce usando la regla 13 ($@7)
+
+    $@7  ir al estado 58
+
+
+State 56
+
+   22 $@10: . %empty  [COMMA]
+   23 args: var NAME . $@10 COMMA args
+   24     | var NAME .  [PARR]
+
+    PARR      reduce usando la regla 24 (args)
+    $default  reduce usando la regla 22 ($@10)
+
+    $@10  ir al estado 59
+
+
+State 57
+
+   17 block: KEYL $@9 . sentences KEYR
+   19 sentences: . sentences sentence
+   20          | . sentence
+   25 sentence: . init POINTCOMMA
+   26         | . assign POINTCOMMA
+   27         | . if
+   28         | . loop
+   29         | . return
+   30         | . print
+   31         | . callFunction POINTCOMMA
+   32         | . break_continue
+   34 init: . var NAME $@11 EQUAL expression
+   35     | . error
+   36 assign: . NAME EQUAL expression
+   37       | . NAME OP_ASSIGN expression
+   43 if: . IF expression_bin $@12 $@13 $@14 block $@15 $@16 else
+   54 loop: . LOOP init $@22 COMMA expression_bin $@23 COMMA assign $@24 block
+   58     | . LOOP $@25 COMMA expression_bin $@26 COMMA $@27 block
+   60 break_continue: . BREAK $@28 POINTCOMMA
+   62               | . CONTINUE $@29 POINTCOMMA
+   64 return: . RETURN expression $@30 POINTCOMMA
+   65 print: . PRINT const POINTCOMMA
+   66      | . PRINT NAME POINTCOMMA
+   85 callFunction: . NAME PARL param PARR
+   89 var: . INT
+   90    | . FLOAT
+
+    error     desplazar e ir al estado 4
+    INT       desplazar e ir al estado 5
+    FLOAT     desplazar e ir al estado 6
+    IF        desplazar e ir al estado 60
+    LOOP      desplazar e ir al estado 61
+    RETURN    desplazar e ir al estado 62
+    BREAK     desplazar e ir al estado 63
+    CONTINUE  desplazar e ir al estado 64
+    PRINT     desplazar e ir al estado 65
+    NAME      desplazar e ir al estado 66
+
+    sentences       ir al estado 67
+    sentence        ir al estado 68
+    init            ir al estado 69
+    assign          ir al estado 70
+    if              ir al estado 71
+    loop            ir al estado 72
+    break_continue  ir al estado 73
+    return          ir al estado 74
+    print           ir al estado 75
+    callFunction    ir al estado 76
+    var             ir al estado 9
+
+
+State 58
+
+   14 $@8: . %empty
+   15 function: FUNC NAME FUNTYPE var $@6 PARL args PARR $@7 . $@8 block
+
+    $default  reduce usando la regla 14 ($@8)
+
+    $@8  ir al estado 77
+
+
+State 59
+
+   23 args: var NAME $@10 . COMMA args
+
+    COMMA  desplazar e ir al estado 78
+
+
+State 60
+
+   43 if: IF . expression_bin $@12 $@13 $@14 block $@15 $@16 else
+   72 expression_bin: . TRUE
+   73               | . FALSE
+   74               | . numeric
+   75               | . NAME
+   76               | . callFunction
+   77               | . expression_bin OP_BIN expression_bin
+   78               | . PARL expression_bin OP_BIN expression_bin PARR
+   83 numeric: . NUM
+   84        | . FLOATNUM
+   85 callFunction: . NAME PARL param PARR
+
+    PARL      desplazar e ir al estado 79
+    TRUE      desplazar e ir al estado 80
+    FALSE     desplazar e ir al estado 81
+    FLOATNUM  desplazar e ir al estado 23
+    NUM       desplazar e ir al estado 24
+    NAME      desplazar e ir al estado 82
+
+    expression_bin  ir al estado 83
+    numeric         ir al estado 84
+    callFunction    ir al estado 85
+
+
+State 61
+
+   34 init: . var NAME $@11 EQUAL expression
+   35     | . error
+   54 loop: LOOP . init $@22 COMMA expression_bin $@23 COMMA assign $@24 block
+   55 $@25: . %empty  [COMMA]
+   58 loop: LOOP . $@25 COMMA expression_bin $@26 COMMA $@27 block
+   89 var: . INT
+   90    | . FLOAT
+
+    error  desplazar e ir al estado 4
+    INT    desplazar e ir al estado 5
+    FLOAT  desplazar e ir al estado 6
+
+    COMMA  reduce usando la regla 55 ($@25)
+
+    init  ir al estado 86
+    $@25  ir al estado 87
+    var   ir al estado 9
+
+
+State 62
+
+   64 return: RETURN . expression $@30 POINTCOMMA
+   67 expression: . numeric
+   68           | . NAME
+   69           | . callFunction
+   70           | . expression OP_ARI expression
+   71           | . PARL expression OP_ARI expression PARR
+   83 numeric: . NUM
+   84        | . FLOATNUM
+   85 callFunction: . NAME PARL param PARR
+
+    PARL      desplazar e ir al estado 22
+    FLOATNUM  desplazar e ir al estado 23
+    NUM       desplazar e ir al estado 24
+    NAME      desplazar e ir al estado 25
+
+    expression    ir al estado 88
+    numeric       ir al estado 27
+    callFunction  ir al estado 28
+
+
+State 63
+
+   59 $@28: . %empty
+   60 break_continue: BREAK . $@28 POINTCOMMA
+
+    $default  reduce usando la regla 59 ($@28)
+
+    $@28  ir al estado 89
+
+
+State 64
+
+   61 $@29: . %empty
+   62 break_continue: CONTINUE . $@29 POINTCOMMA
+
+    $default  reduce usando la regla 61 ($@29)
+
+    $@29  ir al estado 90
+
+
+State 65
+
+   65 print: PRINT . const POINTCOMMA
+   66      | PRINT . NAME POINTCOMMA
+   79 const: . numeric
+   80      | . STRING
+   81      | . TRUE
+   82      | . FALSE
+   83 numeric: . NUM
+   84        | . FLOATNUM
+
+    TRUE      desplazar e ir al estado 91
+    FALSE     desplazar e ir al estado 92
+    FLOATNUM  desplazar e ir al estado 23
+    NUM       desplazar e ir al estado 24
+    STRING    desplazar e ir al estado 93
+    NAME      desplazar e ir al estado 94
+
+    const    ir al estado 95
+    numeric  ir al estado 96
+
+
+State 66
+
+   36 assign: NAME . EQUAL expression
+   37       | NAME . OP_ASSIGN expression
+   85 callFunction: NAME . PARL param PARR
+
+    PARL       desplazar e ir al estado 32
+    EQUAL      desplazar e ir al estado 97
+    OP_ASSIGN  desplazar e ir al estado 98
+
+
+State 67
+
+   17 block: KEYL $@9 sentences . KEYR
+   19 sentences: sentences . sentence
+   25 sentence: . init POINTCOMMA
+   26         | . assign POINTCOMMA
+   27         | . if
+   28         | . loop
+   29         | . return
+   30         | . print
+   31         | . callFunction POINTCOMMA
+   32         | . break_continue
+   34 init: . var NAME $@11 EQUAL expression
+   35     | . error
+   36 assign: . NAME EQUAL expression
+   37       | . NAME OP_ASSIGN expression
+   43 if: . IF expression_bin $@12 $@13 $@14 block $@15 $@16 else
+   54 loop: . LOOP init $@22 COMMA expression_bin $@23 COMMA assign $@24 block
+   58     | . LOOP $@25 COMMA expression_bin $@26 COMMA $@27 block
+   60 break_continue: . BREAK $@28 POINTCOMMA
+   62               | . CONTINUE $@29 POINTCOMMA
+   64 return: . RETURN expression $@30 POINTCOMMA
+   65 print: . PRINT const POINTCOMMA
+   66      | . PRINT NAME POINTCOMMA
+   85 callFunction: . NAME PARL param PARR
+   89 var: . INT
+   90    | . FLOAT
+
+    error     desplazar e ir al estado 4
+    KEYR      desplazar e ir al estado 99
+    INT       desplazar e ir al estado 5
+    FLOAT     desplazar e ir al estado 6
+    IF        desplazar e ir al estado 60
+    LOOP      desplazar e ir al estado 61
+    RETURN    desplazar e ir al estado 62
+    BREAK     desplazar e ir al estado 63
+    CONTINUE  desplazar e ir al estado 64
+    PRINT     desplazar e ir al estado 65
+    NAME      desplazar e ir al estado 66
+
+    sentence        ir al estado 100
+    init            ir al estado 69
+    assign          ir al estado 70
+    if              ir al estado 71
+    loop            ir al estado 72
+    break_continue  ir al estado 73
+    return          ir al estado 74
+    print           ir al estado 75
+    callFunction    ir al estado 76
+    var             ir al estado 9
+
+
+State 68
+
+   20 sentences: sentence .
+
+    $default  reduce usando la regla 20 (sentences)
+
+
+State 69
+
+   25 sentence: init . POINTCOMMA
+
+    POINTCOMMA  desplazar e ir al estado 101
+
+
+State 70
+
+   26 sentence: assign . POINTCOMMA
+
+    POINTCOMMA  desplazar e ir al estado 102
+
+
+State 71
+
+   27 sentence: if .
+
+    $default  reduce usando la regla 27 (sentence)
+
+
+State 72
+
+   28 sentence: loop .
+
+    $default  reduce usando la regla 28 (sentence)
+
+
+State 73
+
+   32 sentence: break_continue .
+
+    $default  reduce usando la regla 32 (sentence)
+
+
+State 74
+
+   29 sentence: return .
+
+    $default  reduce usando la regla 29 (sentence)
+
+
+State 75
+
+   30 sentence: print .
+
+    $default  reduce usando la regla 30 (sentence)
+
+
+State 76
+
+   31 sentence: callFunction . POINTCOMMA
+
+    POINTCOMMA  desplazar e ir al estado 103
+
+
+State 77
+
+   15 function: FUNC NAME FUNTYPE var $@6 PARL args PARR $@7 $@8 . block
+   17 block: . KEYL $@9 sentences KEYR
+   18      | . error
+
+    error  desplazar e ir al estado 52
+    KEYL   desplazar e ir al estado 53
+
+    block  ir al estado 104
+
+
+State 78
+
+   21 args: . %empty  [PARR]
+   23     | . var NAME $@10 COMMA args
+   23     | var NAME $@10 COMMA . args
+   24     | . var NAME
+   89 var: . INT
+   90    | . FLOAT
+
+    INT    desplazar e ir al estado 5
+    FLOAT  desplazar e ir al estado 6
+
+    $default  reduce usando la regla 21 (args)
+
+    args  ir al estado 105
+    var   ir al estado 51
+
+
+State 79
+
+   72 expression_bin: . TRUE
+   73               | . FALSE
+   74               | . numeric
+   75               | . NAME
+   76               | . callFunction
+   77               | . expression_bin OP_BIN expression_bin
+   78               | . PARL expression_bin OP_BIN expression_bin PARR
+   78               | PARL . expression_bin OP_BIN expression_bin PARR
+   83 numeric: . NUM
+   84        | . FLOATNUM
+   85 callFunction: . NAME PARL param PARR
+
+    PARL      desplazar e ir al estado 79
+    TRUE      desplazar e ir al estado 80
+    FALSE     desplazar e ir al estado 81
+    FLOATNUM  desplazar e ir al estado 23
+    NUM       desplazar e ir al estado 24
+    NAME      desplazar e ir al estado 82
+
+    expression_bin  ir al estado 106
+    numeric         ir al estado 84
+    callFunction    ir al estado 85
+
+
+State 80
+
+   72 expression_bin: TRUE .
+
+    $default  reduce usando la regla 72 (expression_bin)
+
+
+State 81
+
+   73 expression_bin: FALSE .
+
+    $default  reduce usando la regla 73 (expression_bin)
+
+
+State 82
+
+   75 expression_bin: NAME .  [error, PARR, KEYL, OP_BIN, COMMA]
+   85 callFunction: NAME . PARL param PARR
+
+    PARL  desplazar e ir al estado 32
+
+    $default  reduce usando la regla 75 (expression_bin)
+
+
+State 83
+
+   38 $@12: . %empty  [error, KEYL]
+   43 if: IF expression_bin . $@12 $@13 $@14 block $@15 $@16 else
+   77 expression_bin: expression_bin . OP_BIN expression_bin
+
+    OP_BIN  desplazar e ir al estado 107
+
+    $default  reduce usando la regla 38 ($@12)
+
+    $@12  ir al estado 108
+
+
+State 84
+
+   74 expression_bin: numeric .
+
+    $default  reduce usando la regla 74 (expression_bin)
+
+
+State 85
+
+   76 expression_bin: callFunction .
+
+    $default  reduce usando la regla 76 (expression_bin)
+
+
+State 86
+
+   51 $@22: . %empty
+   54 loop: LOOP init . $@22 COMMA expression_bin $@23 COMMA assign $@24 block
+
+    $default  reduce usando la regla 51 ($@22)
+
+    $@22  ir al estado 109
+
+
+State 87
+
+   58 loop: LOOP $@25 . COMMA expression_bin $@26 COMMA $@27 block
+
+    COMMA  desplazar e ir al estado 110
+
+
+State 88
+
+   63 $@30: . %empty  [POINTCOMMA]
+   64 return: RETURN expression . $@30 POINTCOMMA
+   70 expression: expression . OP_ARI expression
+
+    OP_ARI  desplazar e ir al estado 33
+
+    $default  reduce usando la regla 63 ($@30)
+
+    $@30  ir al estado 111
+
+
+State 89
+
+   60 break_continue: BREAK $@28 . POINTCOMMA
+
+    POINTCOMMA  desplazar e ir al estado 112
+
+
+State 90
+
+   62 break_continue: CONTINUE $@29 . POINTCOMMA
+
+    POINTCOMMA  desplazar e ir al estado 113
+
+
+State 91
+
+   81 const: TRUE .
+
+    $default  reduce usando la regla 81 (const)
+
+
+State 92
+
+   82 const: FALSE .
+
+    $default  reduce usando la regla 82 (const)
+
+
+State 93
+
+   80 const: STRING .
+
+    $default  reduce usando la regla 80 (const)
+
+
+State 94
+
+   66 print: PRINT NAME . POINTCOMMA
+
+    POINTCOMMA  desplazar e ir al estado 114
+
+
+State 95
+
+   65 print: PRINT const . POINTCOMMA
+
+    POINTCOMMA  desplazar e ir al estado 115
+
+
+State 96
+
+   79 const: numeric .
+
+    $default  reduce usando la regla 79 (const)
+
+
+State 97
+
+   36 assign: NAME EQUAL . expression
+   67 expression: . numeric
+   68           | . NAME
+   69           | . callFunction
+   70           | . expression OP_ARI expression
+   71           | . PARL expression OP_ARI expression PARR
+   83 numeric: . NUM
+   84        | . FLOATNUM
+   85 callFunction: . NAME PARL param PARR
+
+    PARL      desplazar e ir al estado 22
+    FLOATNUM  desplazar e ir al estado 23
+    NUM       desplazar e ir al estado 24
+    NAME      desplazar e ir al estado 25
+
+    expression    ir al estado 116
+    numeric       ir al estado 27
+    callFunction  ir al estado 28
+
+
+State 98
+
+   37 assign: NAME OP_ASSIGN . expression
+   67 expression: . numeric
+   68           | . NAME
+   69           | . callFunction
+   70           | . expression OP_ARI expression
+   71           | . PARL expression OP_ARI expression PARR
+   83 numeric: . NUM
+   84        | . FLOATNUM
+   85 callFunction: . NAME PARL param PARR
+
+    PARL      desplazar e ir al estado 22
+    FLOATNUM  desplazar e ir al estado 23
+    NUM       desplazar e ir al estado 24
+    NAME      desplazar e ir al estado 25
+
+    expression    ir al estado 117
+    numeric       ir al estado 27
+    callFunction  ir al estado 28
+
+
+State 99
+
+   17 block: KEYL $@9 sentences KEYR .
+
+    $default  reduce usando la regla 17 (block)
+
+
+State 100
+
+   19 sentences: sentences sentence .
+
+    $default  reduce usando la regla 19 (sentences)
+
+
+State 101
+
+   25 sentence: init POINTCOMMA .
+
+    $default  reduce usando la regla 25 (sentence)
+
+
+State 102
+
+   26 sentence: assign POINTCOMMA .
+
+    $default  reduce usando la regla 26 (sentence)
+
+
+State 103
+
+   31 sentence: callFunction POINTCOMMA .
+
+    $default  reduce usando la regla 31 (sentence)
+
+
+State 104
+
+   15 function: FUNC NAME FUNTYPE var $@6 PARL args PARR $@7 $@8 block .
+
+    $default  reduce usando la regla 15 (function)
+
+
+State 105
+
+   23 args: var NAME $@10 COMMA args .
+
+    $default  reduce usando la regla 23 (args)
+
+
+State 106
+
+   77 expression_bin: expression_bin . OP_BIN expression_bin
+   78               | PARL expression_bin . OP_BIN expression_bin PARR
+
+    OP_BIN  desplazar e ir al estado 118
+
+
+State 107
+
+   72 expression_bin: . TRUE
+   73               | . FALSE
+   74               | . numeric
+   75               | . NAME
+   76               | . callFunction
+   77               | . expression_bin OP_BIN expression_bin
+   77               | expression_bin OP_BIN . expression_bin
+   78               | . PARL expression_bin OP_BIN expression_bin PARR
+   83 numeric: . NUM
+   84        | . FLOATNUM
+   85 callFunction: . NAME PARL param PARR
+
+    PARL      desplazar e ir al estado 79
+    TRUE      desplazar e ir al estado 80
+    FALSE     desplazar e ir al estado 81
+    FLOATNUM  desplazar e ir al estado 23
+    NUM       desplazar e ir al estado 24
+    NAME      desplazar e ir al estado 82
+
+    expression_bin  ir al estado 119
+    numeric         ir al estado 84
+    callFunction    ir al estado 85
+
+
+State 108
+
+   39 $@13: . %empty
+   43 if: IF expression_bin $@12 . $@13 $@14 block $@15 $@16 else
+
+    $default  reduce usando la regla 39 ($@13)
+
+    $@13  ir al estado 120
+
+
+State 109
+
+   54 loop: LOOP init $@22 . COMMA expression_bin $@23 COMMA assign $@24 block
+
+    COMMA  desplazar e ir al estado 121
+
+
+State 110
+
+   58 loop: LOOP $@25 COMMA . expression_bin $@26 COMMA $@27 block
+   72 expression_bin: . TRUE
+   73               | . FALSE
+   74               | . numeric
+   75               | . NAME
+   76               | . callFunction
+   77               | . expression_bin OP_BIN expression_bin
+   78               | . PARL expression_bin OP_BIN expression_bin PARR
+   83 numeric: . NUM
+   84        | . FLOATNUM
+   85 callFunction: . NAME PARL param PARR
+
+    PARL      desplazar e ir al estado 79
+    TRUE      desplazar e ir al estado 80
+    FALSE     desplazar e ir al estado 81
+    FLOATNUM  desplazar e ir al estado 23
+    NUM       desplazar e ir al estado 24
+    NAME      desplazar e ir al estado 82
+
+    expression_bin  ir al estado 122
+    numeric         ir al estado 84
+    callFunction    ir al estado 85
+
+
+State 111
+
+   64 return: RETURN expression $@30 . POINTCOMMA
+
+    POINTCOMMA  desplazar e ir al estado 123
+
+
+State 112
+
+   60 break_continue: BREAK $@28 POINTCOMMA .
+
+    $default  reduce usando la regla 60 (break_continue)
+
+
+State 113
+
+   62 break_continue: CONTINUE $@29 POINTCOMMA .
+
+    $default  reduce usando la regla 62 (break_continue)
+
+
+State 114
+
+   66 print: PRINT NAME POINTCOMMA .
+
+    $default  reduce usando la regla 66 (print)
+
+
+State 115
+
+   65 print: PRINT const POINTCOMMA .
+
+    $default  reduce usando la regla 65 (print)
+
+
+State 116
+
+   36 assign: NAME EQUAL expression .  [error, KEYL, POINTCOMMA]
+   70 expression: expression . OP_ARI expression
+
+    OP_ARI  desplazar e ir al estado 33
+
+    $default  reduce usando la regla 36 (assign)
+
+
+State 117
+
+   37 assign: NAME OP_ASSIGN expression .  [error, KEYL, POINTCOMMA]
+   70 expression: expression . OP_ARI expression
+
+    OP_ARI  desplazar e ir al estado 33
+
+    $default  reduce usando la regla 37 (assign)
+
+
+State 118
+
+   72 expression_bin: . TRUE
+   73               | . FALSE
+   74               | . numeric
+   75               | . NAME
+   76               | . callFunction
+   77               | . expression_bin OP_BIN expression_bin
+   77               | expression_bin OP_BIN . expression_bin
+   78               | . PARL expression_bin OP_BIN expression_bin PARR
+   78               | PARL expression_bin OP_BIN . expression_bin PARR
+   83 numeric: . NUM
+   84        | . FLOATNUM
+   85 callFunction: . NAME PARL param PARR
+
+    PARL      desplazar e ir al estado 79
+    TRUE      desplazar e ir al estado 80
+    FALSE     desplazar e ir al estado 81
+    FLOATNUM  desplazar e ir al estado 23
+    NUM       desplazar e ir al estado 24
+    NAME      desplazar e ir al estado 82
+
+    expression_bin  ir al estado 124
+    numeric         ir al estado 84
+    callFunction    ir al estado 85
+
+
+State 119
+
+   77 expression_bin: expression_bin . OP_BIN expression_bin
+   77               | expression_bin OP_BIN expression_bin .  [error, PARR, KEYL, OP_BIN, COMMA]
+
+    $default  reduce usando la regla 77 (expression_bin)
+
+    El conflicto entre la regla 77 y el terminal OP_BIN se resuelve como reducción. (%left OP_BIN).
+
+
+State 120
+
+   40 $@14: . %empty
+   43 if: IF expression_bin $@12 $@13 . $@14 block $@15 $@16 else
+
+    $default  reduce usando la regla 40 ($@14)
+
+    $@14  ir al estado 125
+
+
+State 121
+
+   54 loop: LOOP init $@22 COMMA . expression_bin $@23 COMMA assign $@24 block
+   72 expression_bin: . TRUE
+   73               | . FALSE
+   74               | . numeric
+   75               | . NAME
+   76               | . callFunction
+   77               | . expression_bin OP_BIN expression_bin
+   78               | . PARL expression_bin OP_BIN expression_bin PARR
+   83 numeric: . NUM
+   84        | . FLOATNUM
+   85 callFunction: . NAME PARL param PARR
+
+    PARL      desplazar e ir al estado 79
+    TRUE      desplazar e ir al estado 80
+    FALSE     desplazar e ir al estado 81
+    FLOATNUM  desplazar e ir al estado 23
+    NUM       desplazar e ir al estado 24
+    NAME      desplazar e ir al estado 82
+
+    expression_bin  ir al estado 126
+    numeric         ir al estado 84
+    callFunction    ir al estado 85
+
+
+State 122
+
+   56 $@26: . %empty  [COMMA]
+   58 loop: LOOP $@25 COMMA expression_bin . $@26 COMMA $@27 block
+   77 expression_bin: expression_bin . OP_BIN expression_bin
+
+    OP_BIN  desplazar e ir al estado 107
+
+    $default  reduce usando la regla 56 ($@26)
+
+    $@26  ir al estado 127
+
+
+State 123
+
+   64 return: RETURN expression $@30 POINTCOMMA .
+
+    $default  reduce usando la regla 64 (return)
+
+
+State 124
+
+   77 expression_bin: expression_bin . OP_BIN expression_bin
+   77               | expression_bin OP_BIN expression_bin .  [OP_BIN]
+   78               | PARL expression_bin OP_BIN expression_bin . PARR
+
+    PARR  desplazar e ir al estado 128
+
+    $default  reduce usando la regla 77 (expression_bin)
+
+    El conflicto entre la regla 77 y el terminal OP_BIN se resuelve como reducción. (%left OP_BIN).
+
+
+State 125
+
+   17 block: . KEYL $@9 sentences KEYR
+   18      | . error
+   43 if: IF expression_bin $@12 $@13 $@14 . block $@15 $@16 else
+
+    error  desplazar e ir al estado 52
+    KEYL   desplazar e ir al estado 53
+
+    block  ir al estado 129
+
+
+State 126
+
+   52 $@23: . %empty  [COMMA]
+   54 loop: LOOP init $@22 COMMA expression_bin . $@23 COMMA assign $@24 block
+   77 expression_bin: expression_bin . OP_BIN expression_bin
+
+    OP_BIN  desplazar e ir al estado 107
+
+    $default  reduce usando la regla 52 ($@23)
+
+    $@23  ir al estado 130
+
+
+State 127
+
+   58 loop: LOOP $@25 COMMA expression_bin $@26 . COMMA $@27 block
+
+    COMMA  desplazar e ir al estado 131
+
+
+State 128
+
+   78 expression_bin: PARL expression_bin OP_BIN expression_bin PARR .
+
+    $default  reduce usando la regla 78 (expression_bin)
+
+
+State 129
+
+   41 $@15: . %empty
+   43 if: IF expression_bin $@12 $@13 $@14 block . $@15 $@16 else
+
+    $default  reduce usando la regla 41 ($@15)
+
+    $@15  ir al estado 132
+
+
+State 130
+
+   54 loop: LOOP init $@22 COMMA expression_bin $@23 . COMMA assign $@24 block
+
+    COMMA  desplazar e ir al estado 133
+
+
+State 131
+
+   57 $@27: . %empty
+   58 loop: LOOP $@25 COMMA expression_bin $@26 COMMA . $@27 block
+
+    $default  reduce usando la regla 57 ($@27)
+
+    $@27  ir al estado 134
+
+
+State 132
+
+   42 $@16: . %empty
+   43 if: IF expression_bin $@12 $@13 $@14 block $@15 . $@16 else
+
+    $default  reduce usando la regla 42 ($@16)
+
+    $@16  ir al estado 135
+
+
+State 133
+
+   36 assign: . NAME EQUAL expression
+   37       | . NAME OP_ASSIGN expression
+   54 loop: LOOP init $@22 COMMA expression_bin $@23 COMMA . assign $@24 block
+
+    NAME  desplazar e ir al estado 136
+
+    assign  ir al estado 137
+
+
+State 134
+
+   17 block: . KEYL $@9 sentences KEYR
+   18      | . error
+   58 loop: LOOP $@25 COMMA expression_bin $@26 COMMA $@27 . block
+
+    error  desplazar e ir al estado 52
+    KEYL   desplazar e ir al estado 53
+
+    block  ir al estado 138
+
+
+State 135
+
+   43 if: IF expression_bin $@12 $@13 $@14 block $@15 $@16 . else
+   44 $@17: . %empty  [error, KEYR, INT, FLOAT, IF, LOOP, RETURN, BREAK, CONTINUE, PRINT, NAME]
+   45 else: . $@17
+   50     | . ELSE $@18 $@19 $@20 block $@21
+
+    ELSE  desplazar e ir al estado 139
+
+    $default  reduce usando la regla 44 ($@17)
+
+    else  ir al estado 140
+    $@17  ir al estado 141
+
+
+State 136
+
+   36 assign: NAME . EQUAL expression
+   37       | NAME . OP_ASSIGN expression
+
+    EQUAL      desplazar e ir al estado 97
+    OP_ASSIGN  desplazar e ir al estado 98
+
+
+State 137
+
+   53 $@24: . %empty
+   54 loop: LOOP init $@22 COMMA expression_bin $@23 COMMA assign . $@24 block
+
+    $default  reduce usando la regla 53 ($@24)
+
+    $@24  ir al estado 142
+
+
+State 138
+
+   58 loop: LOOP $@25 COMMA expression_bin $@26 COMMA $@27 block .
+
+    $default  reduce usando la regla 58 (loop)
+
+
+State 139
+
+   46 $@18: . %empty
+   50 else: ELSE . $@18 $@19 $@20 block $@21
+
+    $default  reduce usando la regla 46 ($@18)
+
+    $@18  ir al estado 143
+
+
+State 140
+
+   43 if: IF expression_bin $@12 $@13 $@14 block $@15 $@16 else .
+
+    $default  reduce usando la regla 43 (if)
+
+
+State 141
+
+   45 else: $@17 .
+
+    $default  reduce usando la regla 45 (else)
+
+
+State 142
+
+   17 block: . KEYL $@9 sentences KEYR
+   18      | . error
+   54 loop: LOOP init $@22 COMMA expression_bin $@23 COMMA assign $@24 . block
+
+    error  desplazar e ir al estado 52
+    KEYL   desplazar e ir al estado 53
+
+    block  ir al estado 144
+
+
+State 143
+
+   47 $@19: . %empty
+   50 else: ELSE $@18 . $@19 $@20 block $@21
+
+    $default  reduce usando la regla 47 ($@19)
+
+    $@19  ir al estado 145
+
+
+State 144
+
+   54 loop: LOOP init $@22 COMMA expression_bin $@23 COMMA assign $@24 block .
+
+    $default  reduce usando la regla 54 (loop)
+
+
+State 145
+
+   48 $@20: . %empty
+   50 else: ELSE $@18 $@19 . $@20 block $@21
+
+    $default  reduce usando la regla 48 ($@20)
+
+    $@20  ir al estado 146
+
+
+State 146
+
+   17 block: . KEYL $@9 sentences KEYR
+   18      | . error
+   50 else: ELSE $@18 $@19 $@20 . block $@21
+
+    error  desplazar e ir al estado 52
+    KEYL   desplazar e ir al estado 53
+
+    block  ir al estado 147
+
+
+State 147
+
+   49 $@21: . %empty
+   50 else: ELSE $@18 $@19 $@20 block . $@21
+
+    $default  reduce usando la regla 49 ($@21)
+
+    $@21  ir al estado 148
+
+
+State 148
+
+   50 else: ELSE $@18 $@19 $@20 block $@21 .
+
+    $default  reduce usando la regla 50 (else)

@@ -1,0 +1,44 @@
+I a = 10;
+I b = 100;
+I c = 1000;
+
+#ZOP(){
+	print "Init\n";
+	I j = 0;
+	
+	if b<500 {
+
+		print "b<500\n";
+		b -= 100;
+
+		if b < 400 {
+ 
+			print "b<200\n";
+
+		}else{
+
+			print "b>200\n";
+
+		}	
+
+	}else{
+
+		print "b>500\n";
+		b += 100;
+
+		if b > 700 {
+ 
+			print "b>700\n";
+
+		}else{
+
+			print "b<700\n";
+
+		}	
+
+	}
+	
+	print "END\n";
+
+}
+

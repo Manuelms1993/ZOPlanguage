@@ -1,0 +1,17 @@
+#fibo:I(I n){
+	if n < 2{
+		return n;
+	}else{
+		I a1 = fibo(n-1);
+		I a2 = fibo(n-2);
+		return a1+a2;
+	}
+}
+
+#ZOP(){
+	I num = 0;	
+	loop I a = 0, a<100, a +=1{
+		num = fibo(a);
+		print num;
+	}  
+}

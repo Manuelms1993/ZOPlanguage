@@ -1,0 +1,17 @@
+I a = 10;
+I b = 100;
+I c = 1000;
+
+#ZOP(){
+	print "Init\n";
+	I j = 0;
+		
+	loop I i = 0, i < 1000, i += 1 {
+		print i;		
+		if i == 500 {break;}
+	}
+	
+	print "END\n";
+
+}
+

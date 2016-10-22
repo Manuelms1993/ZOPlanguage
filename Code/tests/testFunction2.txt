@@ -1,0 +1,28 @@
+#func4:I(){
+	print "Return func4\n";
+	return 4;
+}
+
+#func3:I(){
+	I f3 = func4();
+	print "Return func3\n";
+	return f3;
+}
+
+#func2:I(){
+	I f2 = func3();
+	print "Return func2\n";
+	return f2;
+}
+
+#func1:I(){
+	I f1 = func2();
+	print "Return func1\n";
+	return f1;
+}
+
+#ZOP(){
+	I num = func1();
+	print num;
+}
+

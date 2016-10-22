@@ -1,0 +1,23 @@
+#ZOP(){
+	
+	I value = 1;
+
+	// despues del bucle "value" debe ser 211
+	loop I i = 0, i < 10 , i += 1 {
+		value += 1;
+		
+		loop I j = 0, j < 1 , j += 1 {
+			value += 10;
+		}
+
+		loop I k = 0, k < 1 , k += 1 {
+			value += 10;
+		}
+
+	}
+
+	print value;
+	print "End\n";
+
+}
+
